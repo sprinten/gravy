@@ -67,6 +67,9 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.11.1"
         runtime ":resources:1.2.7"
 
+        compile ":twitter-bootstrap:3.1.1.3"
+        compile ":lesscss-resources:1.3.3"
+
         //runtime ':twitter-bootstrap:3.1.1.3'
         //runtime ":fields:1.3"
 
