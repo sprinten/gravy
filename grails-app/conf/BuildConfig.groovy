@@ -54,21 +54,24 @@ grails.project.dependency.resolution = {
 
     plugins {
         // plugins for the build system only
-        build ":tomcat:7.0.53"
+        build ':tomcat:7.0.53'
 
         // plugins for the compile step
-        compile ":scaffolding:2.0.3"
+        compile ':scaffolding:2.0.3'
         compile ':cache:1.1.2'
-        compile ':webflow:2.0.8.1'
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate:3.6.10.15" // or ":hibernate4:4.3.5.2"
+        runtime ':hibernate:3.6.10.15' // or ":hibernate4:4.3.5.2"
 
-        runtime ":jquery:1.11.1"
-        runtime ":resources:1.2.7"
+        compile ":kickstart-with-bootstrap:1.1.0"
 
-        compile ":twitter-bootstrap:3.1.1.3"
-        compile ":lesscss-resources:1.3.3"
+        runtime ':jquery:1.8.3'
+        compile ':lesscss-resources:1.3.3'
+
+        compile ':mongodb:3.0.1'
+
+        //compile ":twitter-bootstrap:3.1.1.3"
+        //compile ":lesscss-resources:1.3.3"
 
         //runtime ':twitter-bootstrap:3.1.1.3'
         //runtime ":fields:1.3"

@@ -1,11 +1,15 @@
 package grady
 
+import org.bson.types.ObjectId
+
+
 class Pacient {
 
     enum Sex {
         M, F
     }
 
+    static mapWith = "mongo"
 
     static constraints = {
 
@@ -14,7 +18,7 @@ class Pacient {
         nume size: 2..15, matches: "[a-zA-Z]+", blank: false, nullable: false
         prenume size: 2..15, matches: "[a-zA-Z]+", blank: false, nullable: false
 
-        dataNastere max: new Date(), format: "yyyy-MM-dd"
+        // dataNastere max: new Date(), format: "yyyy-MM-dd"
 
         varsta max: 150
         sex blank: false
@@ -28,11 +32,11 @@ class Pacient {
     }
 
 
-    String id
+    ObjectId id
     String nume
     String prenume
     String cnp
-    Date dataNastere
+    // Date dataNastere
     String telefon
     String adresa
     Integer varsta
@@ -42,4 +46,7 @@ class Pacient {
     Integer greutate
     Boolean fumator
 
+    String toString(){
+        return cnp
+    }
 }

@@ -1,13 +1,17 @@
 package grady
 
+import org.bson.types.ObjectId
+
 class Fisa {
+
+    static mapWith = "mongo"
 
     static constraints = {
     }
 
-    String id
+    ObjectId id
     Pacient pacient
-    Dosar dosar
+    //Dosar dosar
 
     String tip
     Boolean retroactiv

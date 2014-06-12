@@ -1,11 +1,15 @@
 package grady
 
+import org.bson.types.ObjectId
+
 class Dosar {
+
+    static mapWith = "mongo"
 
     static constraints = {
     }
 
-    String id
+    ObjectId id
     Integer numarZileConcediuMedicalUltimile6Luni
     Integer zileSpitalizare
     Integer viziteReumatologie
