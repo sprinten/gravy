@@ -6,8 +6,8 @@ Grady (Grails Rapid Application Development for Ymens) aims to be a framework th
 Functional
 ==========
 
-| Requirement   | Description   | Priority  |
-| ------------- |:-------------:| ---------:|
+| Requirement   | Description   | Priority |
+| ------------- | ------------- |:--------:|
 | Rapid Prototyping | Quickly generate/implement a vertical prototype of the application | Must |
 | Scaffolding | Generate CRUD code up yo UI Layer | Should |
 | Dynamic Form Generation | Generate/Render forms based on data model | Should |
