@@ -19,5 +19,5 @@ Functional
 | Access Control List | Basic authorization based on ACL | Should |
 | Authentication | HTTP basic access authentication and Digest authentication | Must |
 | Reporting | Built-in reporting capabilities | Should |
-| Flexible Data Model	 Flexible schema or schemaless persistence | Must |
+| Flexible Data Model | Flexible schema or schemaless persistence | Must |
 
