@@ -4,9 +4,8 @@ modules = {
 
 	/* Bootstrap definitions without less (if resource processing is switched off) */
 	'bootstrap' {
-		resource url: [dir: 'bootstrap/js/tests/vendor',file: 'jquery.js']
-		resource url: [dir: 'bootstrap/dist/js',		file: 'bootstrap.js']
-		resource url: [dir: 'bootstrap/dist/css',		file: 'bootstrap.css']
+		resource url: [dir: 'bootstrap/js',		file: 'bootstrap.js']
+		resource url: [dir: 'bootstrap/css',		file: 'bootstrap.css']
 	}
 	log.info "| Using CSS files instead of generating from LESS files! (resource processing was switched off)"
 		
@@ -24,8 +23,7 @@ modules = {
 //	if (!(grails.resources?.processing?.enabled != [:] && grails.resources.processing.enabled.booleanValue() == false) ) {
 	/* Bootstrap definitions with less */
 	'bootstrap_less' {
-		resource url: [dir: 'bootstrap/js/tests/vendor',file: 'jquery.js']
-		resource url: [dir: 'bootstrap/dist/js',		file: 'bootstrap.js']
+		resource url: [dir: 'bootstrap/js',		file: 'bootstrap.js']
 		resource url: [dir: 'bootstrap/less',			file: 'bootstrap.less']
 		resource url: [dir: 'kickstart/css',			file: 'dummy.css']			// empty css: see https://github.com/paulfairless/grails-lesscss-resources/issues/25
 	}

@@ -9,19 +9,16 @@
 
 <div class="row">
     <!-- Sidebar -->
-    <div class="col-md-3 col-sm-3 hidden-xs">
+    <div class="col-md-3 col-sm-3">
         <div class="container-fluid">
-            <g:render template="/_menu/controller"/>
+            <g:render template="/_menu/sidebar"/>
         </div>
     </div>
-
     <!-- End Sidebar-->
 
     <div class="col-md-7 col-sm-7">
-
         <div class="container-fluid">
-
-        <!-- Secondary menu in one row (e.g., actions for current controller) -->
+            <!-- Secondary menu in one row (e.g., actions for current controller) -->
             <g:if test="${!layout_nosecondarymenu}">
                 <g:render template="/_menu/submenubar"/>
             </g:if>
@@ -34,6 +31,8 @@
         <!-- Show page's content -->
             <g:layoutBody/>
             <g:pageProperty name="page.body"/>
+
         </div>
     </div>
+
 </div>

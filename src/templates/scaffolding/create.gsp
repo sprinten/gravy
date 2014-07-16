@@ -17,7 +17,8 @@
 		</g:hasErrors>
 
 		<g:form action="save" class="form-horizontal" role="form" <%= multiPart ? ' enctype="multipart/form-data"' : '' %>>
-			<g:render template="form"/>
+
+        <f:all bean="${propertyName}"/>
 
 			<div class="form-actions margin-top-medium">
 				<g:submitButton name="create" class="btn btn-primary" value="\${message(code: 'default.button.create.label', default: 'Create')}" />

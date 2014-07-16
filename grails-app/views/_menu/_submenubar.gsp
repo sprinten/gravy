@@ -7,7 +7,7 @@ This menu is used to show function that can be triggered on the content (an obje
 			&&	params.controller != ''
 			&&	params.controller != 'home'
 }">
-	<ul id="Menu" class="nav nav-pills margin-top-small">
+	<ul class="nav nav-pills">
 
 		<g:set var="entityName" value="${message(code: params.controller+'.label', default: params.controller.substring(0,1).toUpperCase() + params.controller.substring(1).toLowerCase())}" />
 		

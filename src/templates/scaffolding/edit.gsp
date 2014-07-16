@@ -21,8 +21,8 @@
 			<g:hiddenField name="id" value="\${${propertyName}?.id}" />
 			<g:hiddenField name="version" value="\${${propertyName}?.version}" />
 			<g:hiddenField name="_method" value="PUT" />
-			
-			<g:render template="form"/>
+
+            <f:all bean="${propertyName}"/>
 			
 			<div class="form-actions margin-top-medium">
 				<g:actionSubmit class="btn btn-primary" action="update" value="\${message(code: 'default.button.update.label', default: 'Update')}" />

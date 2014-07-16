@@ -3,6 +3,8 @@ package grady
 
 
 import grails.test.mixin.*
+import rnp.Fisa
+import rnp.FisaController
 import spock.lang.*
 
 @TestFor(FisaController)

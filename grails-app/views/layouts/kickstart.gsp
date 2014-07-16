@@ -19,6 +19,7 @@
     <%-- Manual switch for the skin can be found in /view/_menu/_config.gsp --%>
     <r:require modules="jquery"/> <%-- jQuery is required for Bootstrap! --%>
     <r:require modules="flatly"/>
+    <r:require modules="dropdown"/>
     <r:require modules="bootstrap_utils"/>
 
     <r:layoutResources/>

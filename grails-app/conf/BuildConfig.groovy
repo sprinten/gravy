@@ -42,58 +42,54 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenCentral()
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo "http://repository.codehaus.org"
+        mavenRepo "http://download.java.net/maven/2/"
+        mavenRepo "http://repository.jboss.com/maven2/"
     }
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.27'
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
+
+        build("org.tmatesoft.svnkit:svnkit:1.3.5") {
+            excludes "jna", "trilead-ssh2", "sqljet"
+        }
     }
 
     plugins {
         // plugins for the build system only
         build ':tomcat:7.0.53'
 
+
         // plugins for the compile step
         compile ':scaffolding:2.0.3'
         compile ':cache:1.1.2'
 
         // plugins needed at runtime but not for compilation
-        runtime ':hibernate:3.6.10.15' // or ":hibernate4:4.3.5.2"
+        runtime ':hibernate:3.6.10.2'
 
-        runtime ':jquery:1.8.3'
+        runtime ':jquery:1.7.2'
         compile ':mongodb:3.0.1'
 
-
-        build(  ":release:3.0.1",
+        build(":release:3.0.1",
                 ":rest-client-builder:1.0.3") {
             export = false
         }
 
         runtime ":resources:1.2.1"                                        // Needed for Bootstrap's less files
-        compile ":lesscss-resources:1.3.3"                                // Needed for Bootstrap's less files
+        compile ":lesscss-resources:1.3.3"
 
-        //compile ":twitter-bootstrap:3.1.1.3"
-        //compile ":lesscss-resources:1.3.3"
+        compile ":constraints:0.8.0"
 
-        //runtime ':twitter-bootstrap:3.1.1.3'
-        //runtime ":fields:1.3"
+        compile ":fields:1.3"
+
+        compile ":jquery-validation-ui:1.4.9"
+
+        compile ":rich-domain:1.0.6"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0.1"
         //runtime ":cached-resources:1.1"
-        //runtime ":yui-minify-resources:0.1.5"
-
-        // An alternative to the default resources plugin is the asset-pipeline plugin
-        //compile ":asset-pipeline:1.6.1"
-
-        // Uncomment these to enable additional asset-pipeline capabilities
-        //compile ":sass-asset-pipeline:1.5.5"
-        //compile ":less-asset-pipeline:1.5.3"
-        //compile ":coffee-asset-pipeline:1.5.0"
-        //compile ":handlebars-asset-pipeline:1.3.0.1"
     }
 }
