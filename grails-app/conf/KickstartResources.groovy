@@ -5,7 +5,7 @@ modules = {
 	/* Bootstrap definitions without less (if resource processing is switched off) */
 	'bootstrap' {
 		resource url: [dir: 'bootstrap/js',		file: 'bootstrap.js']
-		resource url: [dir: 'bootstrap/css',		file: 'bootstrap.css']
+		resource url: [dir: 'bootstrap/css',	file: 'bootstrap.css']
 	}
 	log.info "| Using CSS files instead of generating from LESS files! (resource processing was switched off)"
 		

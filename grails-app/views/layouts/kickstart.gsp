@@ -21,6 +21,7 @@
     <r:require modules="flatly"/>
     <r:require modules="dropdown"/>
     <r:require modules="bootstrap_utils"/>
+    <r:require modules="jquery-validation-ui" />
 
     <r:layoutResources/>
     <g:layoutHead/>
