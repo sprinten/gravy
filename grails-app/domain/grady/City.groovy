@@ -21,6 +21,6 @@ class City extends Child<State> {
     }
 
     static constraints = {
-        parent blank: false, nullable: false, children: true
+        parent blank: false, nullable: false//, children: true
     }
 }

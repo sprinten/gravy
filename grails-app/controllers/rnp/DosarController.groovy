@@ -48,7 +48,7 @@ class DosarController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'dosarInstance.label', default: 'Dosar'), dosarInstance.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'dosarInstance.label', default: 'Dosar'), dosarInstance.numar])
                 redirect dosarInstance
             }
             '*' { respond dosarInstance, [status: CREATED] }
@@ -75,7 +75,7 @@ class DosarController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Dosar.label', default: 'Dosar'), dosarInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Dosar.label', default: 'Dosar'), dosarInstance.numar])
                 redirect dosarInstance
             }
             '*' { respond dosarInstance, [status: OK] }
@@ -94,7 +94,7 @@ class DosarController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Dosar.label', default: 'Dosar'), dosarInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Dosar.label', default: 'Dosar'), dosarInstance.numar])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }
@@ -104,7 +104,7 @@ class DosarController {
     protected void notFound() {
         request.withFormat {
             form {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'dosarInstance.label', default: 'Dosar'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'dosarInstance.label', default: 'Dosar'), params.numar])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }

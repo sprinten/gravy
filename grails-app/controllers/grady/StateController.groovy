@@ -51,7 +51,7 @@ class StateController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'stateInstance.label', default: 'State'), stateInstance.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'stateInstance.label', default: 'State'), stateInstance.name])
                 redirect stateInstance
             }
             '*' { respond stateInstance, [status: CREATED] }
@@ -78,7 +78,7 @@ class StateController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'State.label', default: 'State'), stateInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'State.label', default: 'State'), stateInstance.name])
                 redirect stateInstance
             }
             '*' { respond stateInstance, [status: OK] }
@@ -97,7 +97,7 @@ class StateController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'State.label', default: 'State'), stateInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'State.label', default: 'State'), stateInstance.name])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }

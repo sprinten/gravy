@@ -9,7 +9,7 @@ class ChildrenConstraint {
     }
 
     def validate = { val ->
-        return true
+        return val.children != null
     }
 
 }

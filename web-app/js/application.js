@@ -7,3 +7,12 @@ if (typeof jQuery !== 'undefined') {
 		});
 	})(jQuery);
 }
+
+// JQuery Validation UI for Twitter Bootstrap
+function highlightErrorField(element, errorClass, validClass) {
+    $(element).parents('div.control-group').addClass('error')
+}
+
+function unhighlightErrorField(element, errorClass, validClass) {
+    $(element).parents('div.control-group').removeClass('error')
+}

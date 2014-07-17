@@ -20,7 +20,7 @@ class Pacient {
         nume size: 2..15, matches: "[a-zA-Z]+", blank: false, nullable: false
         prenume size: 2..15, matches: "[a-zA-Z]+", blank: false, nullable: false
 
-        dataNastere max: new Date(), format: "yyyy-MM-dd",  attributes: ["precision": "day", "years": 2016..1970]
+        dataNastere max: new Date(), format: "yyyy-MM-dd", attributes: ["precision": "day", "years": 2016..1970]
 
         varsta max: 150
         sex blank: false
@@ -32,12 +32,12 @@ class Pacient {
         telefon blank: true, nullable: true, matches: "^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*\$"
         adresa blank: true, nullable: true, widget: "textarea"
 
-        state blank: true, nullable: true, children: true
+        state blank: true, nullable: true //, children: true
 
-        city blank: true, nullable: true, cascade: [parent: "state"]
+        city blank: true, nullable: true //, cascade: [parent: "state"]
     }
 
-    static	hasMany		= [dosare: Dosar]
+    static hasMany = [dosare: Dosar]
 
     ObjectId id
     String nume

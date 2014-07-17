@@ -119,11 +119,17 @@ log4j = {
 
 // Added by the JQuery Validation UI plugin:
 jqueryValidationUi {
-	errorClass = 'error'
-	validClass = ''
-	onsubmit = true
-	renderErrorsOnTop = false
-	
+    errorClass = 'alert-danger' // for top errors
+    //errorClass = 'help-block' // for inline error
+    validClass = 'has-success'
+    onsubmit = true
+    renderErrorsOnTop = true
+    errorContainer = 'div.alert'
+    errorLabelContainer = 'div.alert ul'
+    errorElement = 'span' // for inline error
+    highlight = 'highlightErrorField'
+    unhighlight = 'unhighlightErrorField'
+
 	qTip {
 		packed = true
 	  classes = 'ui-tooltip-red ui-tooltip-shadow ui-tooltip-rounded'  

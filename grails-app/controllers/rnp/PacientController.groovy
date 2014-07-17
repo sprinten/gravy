@@ -43,7 +43,7 @@ class PacientController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'pacient.label', default: 'Pacient'), pacientInstance.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'pacient.label', default: 'Pacient'), pacientInstance.cnp])
                 redirect pacientInstance
             }
             '*' { respond pacientInstance, [status: CREATED] }
@@ -70,7 +70,7 @@ class PacientController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Pacient.label', default: 'Pacient'), pacientInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Pacient.label', default: 'Pacient'), pacientInstance.cnp])
                 redirect pacientInstance
             }
             '*'{ respond pacientInstance, [status: OK] }
@@ -89,7 +89,7 @@ class PacientController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Pacient.label', default: 'Pacient'), pacientInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Pacient.label', default: 'Pacient'), pacientInstance.cnp])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

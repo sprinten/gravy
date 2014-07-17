@@ -49,7 +49,7 @@ class CityController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'cityInstance.label', default: 'City'), cityInstance.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'cityInstance.label', default: 'City'), cityInstance.name])
                 redirect cityInstance
             }
             '*' { respond cityInstance, [status: CREATED] }
@@ -76,7 +76,7 @@ class CityController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'City.label', default: 'City'), cityInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'City.label', default: 'City'), cityInstance.name])
                 redirect cityInstance
             }
             '*' { respond cityInstance, [status: OK] }
@@ -95,7 +95,7 @@ class CityController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'City.label', default: 'City'), cityInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'City.label', default: 'City'), cityInstance.name])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }
