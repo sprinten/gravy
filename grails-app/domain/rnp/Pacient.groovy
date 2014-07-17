@@ -22,11 +22,11 @@ class Pacient {
 
         dataNastere max: new Date(), format: "yyyy-MM-dd", attributes: ["precision": "day", "years": 2016..1970]
 
-        varsta max: 150
+        varsta min:0, max: 120
         sex blank: false
 
-        inaltime max: 2.8D
-        greutate min: 3, max: 250, widget: "textField"
+        inaltime min: 0.1F, max: 2.8F, scale: 2
+        greutate min: 3, max: 250
 
         mail email: true, blank: true, nullable: true
         telefon blank: true, nullable: true, matches: "^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*\$"
@@ -53,7 +53,7 @@ class Pacient {
     Integer varsta
     Sex sex
     String mail;
-    Double inaltime
+    Float inaltime
     Integer greutate
     Boolean fumator
 

@@ -29,38 +29,6 @@
 		<g:link class="btn btn-large btn-primary" controller="nextSteps">Next Steps</g:link>
 	</section>
 
-	<section id="info">
-		<div class="row">
-	    	<div class="col-md-4">
-		    	<div class="center">
-					<img class="frontpageImage" src="${resource(plugin: 'kickstart', dir: 'images/frontpage',file: 'bs-docs-twitter-github.png')}" />
-					<h3>Bootstrap 3.0.3</h3>
-				</div>
-				<p>Kickstart uses <a href ="http://twitter.github.com/bootstrap/">Bootstrap</a> to render the web pages. 
-				Bootstrap is made by Mark Otto (<a href="http://twitter.com/mdo">@mdo</a>) and Billy Gates (<a href="http://twitter.com/fat">@fat</a>).
-				Bootstrap is designed to help people of all skill levels as a complete kit or to start something more complex.
-				</p>
-			</div>
-	    	<div class="col-md-4">
-		    	<div class="center">
-					<img class="frontpageImage" src="${resource(plugin: 'kickstart', dir: 'images/frontpage',file: 'browser_logos.png')}" />
-					<h3>Browser support</h3>
-				</div>
-				<p>Bootstrap is tested and supported in major modern browsers like Chrome 14, Safari 5+, Opera 11, Internet Explorer 7, and Firefox 5.</p>
-			</div>
-	    	<div class="col-md-4">
-		    	<div class="center">
-					<img class="frontpageImage" src="${resource(plugin: 'kickstart', dir: 'images/frontpage',file: 'html5css3js8.png')}"/>
-					<h3>Tech Foundation</h3>
-				</div>
-				<p>Bootstrap is based on elements of HTML 5, CSS 3, Javascript 1.8, and jQuery 1.7 with progressively enhanced 
-				components to enable a responsive design of the website.
-				Kickstart is built using Groovy 2.x and Java 7 integrated into the Grails 2.3.x framework. 
-				</p>
-			</div>
-	    </div>
-	</section>
-
 	<section id="info2">
 		<div class="row">
 	    	<div class="col-md-4">

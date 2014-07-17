@@ -16,7 +16,7 @@
 	</content>
 	
 	<section id="resources">
-	    <h1><g:message code="default.systeminfo.resources"/></h1>
+	    <h1><g:message code="default.system.resources"/></h1>
 	    <ul>
 			<li>Web Layout: <a href ="http://twitter.github.com/bootstrap/">Bootstrap</a>, from Twitter 
 	        	Licensed under the Apache License v2.0. Documentation licensed under CC BY 3.0. 
@@ -29,7 +29,7 @@
 	</section>
 	
 	<section id="application">
-	     <h1><g:message code="default.systeminfo.status"/></h1>
+	     <h1><g:message code="default.system.status"/></h1>
 	     <ul>
 			<li>App version: <g:meta name="app.version"/></li>
 			<li>Grails version: <g:meta name="app.grails.version"/></li>
@@ -44,7 +44,7 @@
 	</section>
 	
 	<section id="resources">
-	     <h1><g:message code="default.systeminfo.plugins"/></h1>
+	     <h1><g:message code="default.system.plugins"/></h1>
 	     <ul>
 	         <g:set var="pluginManager"
 	                value="${applicationContext.getBean('pluginManager')}"></g:set>

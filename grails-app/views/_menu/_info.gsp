@@ -21,8 +21,8 @@
 			</a>
 		</li>
         <li class="">
-            <a href="${createLink(uri: '/systeminfo')}">
-                <g:message code="default.systeminfo.label"/>
+            <a href="${createLink(uri: '/system')}">
+                <g:message code="default.info.label"/>
             </a>
         </li>
     </ul>

@@ -12,14 +12,6 @@
                         <i class="glyphicon glyphicon-eye-open"></i>
                         <a href="${createLink(uri: '/')}"><g:message code="default.tour.label"/></a>
                     </li>
-                    <li>
-                        <i class="glyphicon glyphicon-money"></i>
-                        <a href="${createLink(uri: '/')}"><g:message code="default.pricing.label"/></a>
-                    </li>
-                    <li>
-                        <i class="glyphicon glyphicon-comments"></i>
-                        <a href="${createLink(uri: '/')}"><g:message code="default.faq.label"/></a>
-                    </li>
                 </ul>
             </div>
 
@@ -36,6 +28,18 @@
                         <i class="glyphicon glyphicon-envelope"></i>
                         <a href="${createLink(uri: '/contact')}">
                             <g:message code="default.contact.label"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-2">
+                <h4>Technical</h4>
+                <ul class="unstyled">
+                    <li>
+                        <i class="glyphicon glyphicon-envelope"></i>
+                        <a href="${createLink(uri: '/system')}">
+                            <g:message code="default.system.label"/>
                         </a>
                     </li>
                 </ul>
