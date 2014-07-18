@@ -19,7 +19,9 @@
 
     <% //<g:render template="/layouts/errors"/> %>
 
-    <g:form action="save" class="form-horizontal" role="form" <%=multiPart ? ' enctype="multipart/form-data"' : '' %>>
+    <h4 class="title"><g:message code="default.edit.label" args="[entityName]"/></h4>
+
+    <g:form action="save" class="form-horizontal form-group-sm" role="form" <%=multiPart ? ' enctype="multipart/form-data"' : '' %>>
 
     <f:all bean="${propertyName}"/>
 

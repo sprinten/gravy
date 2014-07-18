@@ -1,35 +1,59 @@
-<%@ page import="java.lang.reflect.Type; java.lang.reflect.ParameterizedType; cascade.Parent" defaultCodec="html" %>
+<%@ page import="org.codehaus.groovy.grails.validation.Constraint; org.codehaus.groovy.grails.validation.ConstrainedProperty; java.lang.reflect.Type; java.lang.reflect.ParameterizedType;" defaultCodec="html" %>
+
+<%
+    ConstrainedProperty constrainedProperty = (ConstrainedProperty) bean?.domainClass?.getConstrainedProperties().get(property);
+
+    boolean hasCascade = constrainedProperty?.hasAppliedConstraint("cascade")
+%>
 <div class="form-group ${invalid ? 'has-error' : 'has-success'}">
 
     <label class="control-label col-md-3" for="${property}">${label}</label>
 
-    <%
-        String childElement = bean?.class?.getDeclaredField(property)?.type?.getDeclaredField("child")?.get(String.class)
-        String selected = bean?."${childElement}"?.id
-        String id = bean?."${property}"?.id
-    %>
+    <g:if test="${hasCascade}">
+        <%
+            Constraint constraint = constrainedProperty?.getAppliedConstraint("cascade")
 
-    <div class="col-md-8">
+            def childElement = constraint?.parameter["child"]
 
-    <f:input bean="${bean}" property="${property}" value="${value}" noSelection="['': 'Choose...']" class="form-control"
-             onchange="updateChild(this.value, this.id)"/>
+            String selected = bean?."${childElement}"?.id
+            String id = bean?."${property}"?.id
+        %>
 
-    <g:if test="${invalid}"><span class="help-block">${errors.join('<br>')}</span></g:if>
+
+
+        <div class="col-md-8">
+            <f:input bean="${bean}" property="${property}" value="${value}" noSelection="['': 'Choose...']"
+                     class="form-control"
+                     onchange="updateChild(this.value, this.id)"/>
+
+            <g:if test="${invalid}"><span class="help-block">${errors.join('<br>')}</span></g:if>
+        </div>
+
+
+        <script>
+            <g:remoteFunction controller="cascade" action="children" update="${childElement}Select" params="'id=${id?.toString()}&name=${property?.toString()}&selected=${selected}'"/>
+
+            function updateChild(id, name) {
+                <g:remoteFunction controller="cascade" action="children" update="${childElement}Select" params="'id='+id+'&name='+name"/>
+            }
+
+        </script>
+
+    </g:if>
+
+    <g:if test="${!hasCascade}">
+
+        <div class="col-md-8">
+
+            <g:select class="form-control" id="${property.name}" name="${name}.id" from="${property.type.name.list()}"
+                      optionKey="id" required="" value="${"${domainInstance}?.${property.name}"?.id}"
+                      noSelection="['': 'Choose...']"/>
+
+            <g:if test="${invalid}"><span class="help-block">${errors.join('<br>')}</span></g:if>
+        </div>
+
+    </g:if>
+
+    <div class="col-md-1">
+    </div>
 </div>
-
-
-<script>
-
-    <g:remoteFunction controller="select" action="children" update="${childElement}Select" params="'id=${id?.toString()}&name=${property?.toString()}&selected=${selected}'"/>
-
-    function updateChild(id, name) {
-        <g:remoteFunction controller="select" action="children" update="${childElement}Select" params="'id='+id+'&name='+name"/>
-    }
-
-</script>
-
-<div class="col-md-1">
-</div>
-
-</div>
-

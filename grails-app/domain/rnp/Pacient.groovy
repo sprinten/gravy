@@ -22,20 +22,23 @@ class Pacient {
 
         dataNastere max: new Date(), format: "yyyy-MM-dd", attributes: ["precision": "day", "years": 2016..1970]
 
-        varsta min:0, max: 120
+        varsta min: 0, max: 120
         sex blank: false
 
         inaltime min: 0.1F, max: 2.8F, scale: 2
         greutate min: 3, max: 250
 
-        mail email: true, blank: true, nullable: true
-        telefon blank: true, nullable: true, matches: "^(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*\$"
-        adresa blank: true, nullable: true, widget: "textarea"
+        fumator nullable: true
 
-        state blank: true, nullable: true //, children: true
+        dosare nullable: true
 
-        city blank: true, nullable: true //, cascade: [parent: "state"]
+        state blank: true, nullable: true , cascade: [child: "city"]
+        city blank: true, nullable: true
+        address nullable: true
+
     }
+
+    static embedded = ['address']
 
     static hasMany = [dosare: Dosar]
 
@@ -48,17 +51,17 @@ class Pacient {
 
     List<Dosar> dosare = [].withLazyDefault { new Dosar() }
 
-    String telefon
-    String adresa
+    State state
+    City city
+
+    Address address
+
     Integer varsta
     Sex sex
-    String mail;
+
     Float inaltime
     Integer greutate
     Boolean fumator
-
-    State state
-    City city
 
     String toString() {
         return cnp

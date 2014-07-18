@@ -1,4 +1,4 @@
-<%@ page import="java.lang.reflect.Type; java.lang.reflect.ParameterizedType; cascade.Parent" defaultCodec="html" %>
+<%@ page import="java.lang.reflect.Type; java.lang.reflect.ParameterizedType; grady.cascade.Parent" defaultCodec="html" %>
 <div class="form-group ${invalid ? 'has-error' : 'has-success'}">
 
     <label class="control-label col-md-3" for="${property}">${label}</label>

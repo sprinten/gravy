@@ -23,7 +23,8 @@ class Fisa {
 
     Dosar dosar
 
-
+//    Toggle hasBoala
+//    Boala boala
 
     Boolean retroactiv
 

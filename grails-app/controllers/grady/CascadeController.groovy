@@ -1,6 +1,6 @@
 package grady
 
-import cascade.Parent
+import grady.cascade.Parent
 import grails.transaction.Transactional
 import org.codehaus.groovy.grails.commons.GrailsDomainClass
 
@@ -8,7 +8,7 @@ import org.codehaus.groovy.grails.commons.GrailsDomainClass
  * Generic Controller for Cascade Selects
  */
 @Transactional(readOnly = true)
-class SelectController {
+class CascadeController {
 
     static scaffold = false
 

@@ -20,7 +20,9 @@
 
     <% //<g:render template="/layouts/errors"/> %>
 
-    <g:form method="post" class="form-horizontal" role="form" <%=multiPart ? ' enctype="multipart/form-data"' : '' %>>
+    <legend><g:message code="default.edit.label" args="[entityName]"/></legend>
+
+    <g:form method="post" class="form-horizontal form-group-sm" role="form" <%=multiPart ? ' enctype="multipart/form-data"' : '' %>>
     <g:hiddenField name="id" value="\${${propertyName}?.id}"/>
     <g:hiddenField name="version" value="\${${propertyName}?.version}"/>
     <g:hiddenField name="_method" value="PUT"/>

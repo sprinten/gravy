@@ -1,27 +1,23 @@
-import cascade.Child
-import cascade.Parent
+import grady.cascade.Child
+import grady.cascade.Parent
 
 class CascadeConstraint {
 
-    static expectsParams = ['parent']
+    static expectsParams = ['child']
 
     static defaultMessageCode = "cascade.parent.missing"
 
     def supports = { type ->
-        return type!= null && Child.class.isAssignableFrom(type);
+        return type && Parent.class.isAssignableFrom(type);
     }
 
     def validate = { value, target ->
 
-        def parentProperty = params.parent
+        def property = params.child
 
-        Parent parentObj = target.getProperty(parentProperty);
+        def childObj = target."${property}"
 
-        if (parentObj == null)
-            return ['cascade.parent.missing']
-        else if (!(value in parentObj.children))
-            return ['cascade.parent.invalid']
-        return true
+        return Child.class.isAssignableFrom(childObj?.class);
     }
 
 }

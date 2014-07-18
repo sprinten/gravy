@@ -1,17 +1,16 @@
-package cascade
+package grady.fields.embedded
 
 import org.bson.types.ObjectId
 
 /**
  *
  */
-abstract class Item {
+abstract class Embed {
 
     ObjectId id
-    String name
 
     @Override
     public String toString() {
-        return name;
+        return id;
     }
 }
