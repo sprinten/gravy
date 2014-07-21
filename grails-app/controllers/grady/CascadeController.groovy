@@ -14,16 +14,21 @@ class CascadeController {
 
     static allowedMethods = []
 
-    def children() {
+    def load() {
 
+        // Retrieve the Domain Class of the Parent Select based on param[name]
         GrailsDomainClass clazz = grailsApplication.getArtefactByLogicalPropertyName("Domain", params.name)
 
-        Parent parentInstance = clazz?.newInstance()?.get(params.id)
+        // Retrieve the Parent Select Value based on param[id]
+        Parent parentInstance = clazz?.referenceInstance?.get(params.id)
 
+        // Retrieve the Parent Select child list
         def children = parentInstance?.children
 
+        // Child Select is enabled only if child list is not empty
         boolean enabled = children && children.size() > 0
 
+        // Determine Child Property Name. We do not have the bean class so we have to rely on reflection
         def name = enabled ? grailsApplication.getArtefact("Domain", children[0].class.name).logicalPropertyName : "undefined"
 
         def selected = enabled && params.selected ? params.selected : ""

@@ -31,10 +31,10 @@
 
 
         <script>
-            <g:remoteFunction controller="cascade" action="children" update="${childElement}Select" params="'id=${id?.toString()}&name=${property?.toString()}&selected=${selected}'"/>
+            <g:remoteFunction controller="cascade" action="load" update="${childElement}Select" params="'id=${id?.toString()}&name=${property?.toString()}&selected=${selected}'"/>
 
             function updateChild(id, name) {
-                <g:remoteFunction controller="cascade" action="children" update="${childElement}Select" params="'id='+id+'&name='+name"/>
+                <g:remoteFunction controller="cascade" action="load" update="${childElement}Select" params="'id='+id+'&name='+name"/>
             }
 
         </script>

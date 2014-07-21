@@ -1,5 +1,6 @@
 package rnp
 
+import grady.annotations.Toggle
 import org.bson.types.ObjectId
 
 class Fisa {
@@ -8,13 +9,30 @@ class Fisa {
 
     static constraints = {
 
-        numar blank: false, nullable: false, unique: true
+        numar nullable: false, unique: true
         dataCompletare attributes: ["precision": "day", "years": 2016..1970]
 
         status inList: ["Initiat", "Aprobat"]
 
         tip inList: ["Initiere", "Monitorizare"]
+
+        hasBoala nullable: false
+
+        boala nullable: true, validator: { val, obj ->
+            if (obj.hasBoala) {
+
+                if (val.isEmpty()) {
+                    return ['not.empty']
+                }
+            } else {
+                if (!val.isEmpty()) {
+                    return ['empty']
+                }
+            }
+        }
     }
+
+    static embedded = ['boala']
 
     static belongsTo = [dosar: Dosar]
 
@@ -23,8 +41,10 @@ class Fisa {
 
     Dosar dosar
 
-//    Toggle hasBoala
-//    Boala boala
+    @Toggle("boala")
+    Boolean hasBoala
+
+    Boala boala
 
     Boolean retroactiv
 

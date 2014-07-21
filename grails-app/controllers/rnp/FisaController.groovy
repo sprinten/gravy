@@ -74,7 +74,7 @@ class FisaController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Fisa.label', default: 'Fisa'), fisaInstance.cnp])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Fisa.label', default: 'Fisa'), fisaInstance.numar])
                 redirect fisaInstance
             }
             '*' { respond fisaInstance, [status: OK] }
@@ -93,7 +93,7 @@ class FisaController {
 
         request.withFormat {
             form {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Fisa.label', default: 'Fisa'), fisaInstance.cnp])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Fisa.label', default: 'Fisa'), fisaInstance.numar])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }

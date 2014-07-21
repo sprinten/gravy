@@ -289,6 +289,7 @@ class BootstrapTagLib {
 
 		def value		= attrs.remove('value')
 		def name		= attrs.remove('name')
+         def toggle		= attrs.remove('toggle')
 		def onLabel		= attrs.remove('onLabel')  ?: "checkbox.on.label"
 		def offLabel	= attrs.remove('offLabel') ?: "checkbox.off.label"
 		booleanToAttribute(attrs, 'disabled')
@@ -352,8 +353,8 @@ class BootstrapTagLib {
 
 		out << """
 				<div id="btn-group" class="btn-group radiocheckbox" data-toggle="buttons-radio">
-					<button class="btn btn-sm on   ${value ? 'active btn-primary' : ''}">${messageSource.getMessage(onLabel, null, onLabel, locale)}</button>
-					<button class="btn btn-sm off ${!value ? 'active btn-primary' : ''}">${messageSource.getMessage(offLabel, null, offLabel, locale)}</button>
+					<button class="btn btn-sm on   ${value ? 'active btn-primary' : ''}" """ + ( toggle ? """onclick="toggle(true)" """ : """""")+ """>${messageSource.getMessage(onLabel, null, onLabel, locale)}</button>
+					<button class="btn btn-sm off ${!value ? 'active btn-primary' : ''}" """ + ( toggle ? """onclick="toggle(false)" """ : """""")+ """>${messageSource.getMessage(offLabel, null, offLabel, locale)}</button>
 				</div>
 		"""
 	}

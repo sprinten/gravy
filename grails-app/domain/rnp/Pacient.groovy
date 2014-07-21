@@ -32,7 +32,7 @@ class Pacient {
 
         dosare nullable: true
 
-        state blank: true, nullable: true , cascade: [child: "city"]
+        state blank: true, nullable: true, cascade: [child: "city"]
         city blank: true, nullable: true
         address nullable: true
 
