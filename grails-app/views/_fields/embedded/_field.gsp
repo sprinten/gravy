@@ -1,4 +1,4 @@
-<%@ page import="org.codehaus.groovy.grails.commons.GrailsDomainClass; org.codehaus.groovy.grails.commons.GrailsDomainClassProperty" defaultCodec="html" %>
+<%@ page import="grady.annotations.Embedded; org.codehaus.groovy.grails.commons.GrailsDomainClass; org.codehaus.groovy.grails.commons.GrailsDomainClassProperty" defaultCodec="html" %>
 
 
 <!-- TODO: Make recursive -->
@@ -7,10 +7,12 @@
 <%
     GrailsDomainClass nestedClass = grailsApplication.getArtefactByLogicalPropertyName("Domain", property)
     def properties = nestedClass?.getPersistentProperties()
-    boolean isEmbedded = bean?.domainClass.getPropertyByName(property).isEmbedded()
+
+    def annotations = bean?.domainClass?.clazz.getDeclaredField(property)?.annotations
+    def annotation = bean?.domainClass?.clazz.getDeclaredField(property)?.getAnnotation(Embedded.class)
+
+    boolean isEmbedded = (annotation != null)
 %>
-
-
 
 <g:if test="${isEmbedded}">
     <div id="${property}Toggle">
@@ -22,7 +24,7 @@
             GrailsDomainClass subNestedClass = grailsApplication.getArtefactByLogicalPropertyName("Domain", propertyName)
             def subProperties = subNestedClass?.getPersistentProperties()
 
-            isEmbedded = bean?.domainClass.getPropertyByName("${property}.${propertyName}").isEmbedded()
+            isEmbedded = nestedClass.clazz.getDeclaredField("${propertyName}")?.getAnnotation(Embedded.class)
         %>
 
         <g:if test="${!isEmbedded}">
@@ -36,5 +38,9 @@
         </g:if>
     </g:each>
     </div>
+</g:if>
+
+<g:if test="${!isEmbedded}">
+    <f:input bean="${bean}" property="${property}" class="form-control"/>
 </g:if>
 

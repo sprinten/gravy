@@ -2,6 +2,7 @@ package rnp
 
 import grady.City
 import grady.State
+import grady.annotations.Embedded
 import org.bson.types.ObjectId
 
 
@@ -54,6 +55,7 @@ class Pacient {
     State state
     City city
 
+    @Embedded
     Address address
 
     Integer varsta

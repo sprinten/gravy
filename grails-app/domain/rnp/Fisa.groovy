@@ -1,5 +1,6 @@
 package rnp
 
+import grady.annotations.Embedded
 import grady.annotations.Toggle
 import org.bson.types.ObjectId
 
@@ -44,6 +45,7 @@ class Fisa {
     @Toggle("boala")
     Boolean hasBoala
 
+    @Embedded
     Boala boala
 
     Boolean retroactiv
