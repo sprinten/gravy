@@ -1,6 +1,5 @@
 package rnp
 
-import grady.annotations.Embedded
 import grady.annotations.Toggle
 import org.bson.types.ObjectId
 
@@ -17,16 +16,20 @@ class Fisa {
 
         tip inList: ["Initiere", "Monitorizare"]
 
+        dosar nullable: true
+
+        retroactiv nullable: true
+
         hasBoala nullable: false
 
         boala nullable: true, validator: { val, obj ->
             if (obj.hasBoala) {
 
-                if (val.isEmpty()) {
+                if (val?.isEmpty()) {
                     return ['not.empty']
                 }
             } else {
-                if (!val.isEmpty()) {
+                if (!val?.isEmpty()) {
                     return ['empty']
                 }
             }
@@ -45,7 +48,6 @@ class Fisa {
     @Toggle("boala")
     Boolean hasBoala
 
-    @Embedded
     Boala boala
 
     Boolean retroactiv

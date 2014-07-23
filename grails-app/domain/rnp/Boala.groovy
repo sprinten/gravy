@@ -1,9 +1,8 @@
 package rnp
 
-import grady.fields.embedded.Embed
 import org.bson.types.ObjectId
 
-class Boala extends Embed {
+class Boala {
 
     static mapWith = "mongo"
 
@@ -12,11 +11,12 @@ class Boala extends Embed {
         severitate blank: true, nullable: true, inList: ["Usoara", "Cronica"]
     }
 
+    ObjectId id
     String nume
     String severitate
 
     String toString() {
-        return nume
+        return nume + " " + severitate
     }
 
     Boolean isEmpty() {

@@ -2,7 +2,6 @@ package rnp
 
 import grady.City
 import grady.State
-import grady.annotations.Embedded
 import org.bson.types.ObjectId
 
 
@@ -36,10 +35,10 @@ class Pacient {
         state blank: true, nullable: true, cascade: [child: "city"]
         city blank: true, nullable: true
         address nullable: true
-
+        acasa nullable: true
     }
 
-    static embedded = ['address']
+    static embedded = ['address', 'acasa']
 
     static hasMany = [dosare: Dosar]
 
@@ -55,8 +54,9 @@ class Pacient {
     State state
     City city
 
-    @Embedded
     Address address
+
+    Address acasa
 
     Integer varsta
     Sex sex

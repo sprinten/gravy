@@ -11,7 +11,7 @@ import grails.transaction.Transactional
 class FisaController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-    static scaffold = true
+    // static scaffold = true
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)

@@ -23,7 +23,7 @@
 
     <g:form action="save" class="form-horizontal form-group-sm" role="form" <%=multiPart ? ' enctype="multipart/form-data"' : '' %>>
 
-    <f:all bean="${propertyName}"/>
+    <g:render template="form"/>
 
     <div class="form-actions margin-top-medium">
         <g:submitButton name="create" class="btn btn-primary"

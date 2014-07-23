@@ -10,15 +10,16 @@ class UrlMappings {
         "/system"(view: "/info/system")
         "/contact"(view: "/info/contact")
 
+
+        "/" {
+            controller = 'home'
+            action = { 'index' }
+        }
+
         /*
          * Pages with controller
          * WARN: No domain/controller should be named "api" or "mobile" or "web"!
          */
-        "/" {
-            controller = 'home'
-            action = { 'index' }
-            view = { 'index' }
-        }
 
         "/$controller/$action?/$id?" {
             constraints {

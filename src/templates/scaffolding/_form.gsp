@@ -1,54 +1,150 @@
 <%=packageName%>
-<% import grails.persistence.Event %>
+<%
+    import grails.persistence.Event
+    import grady.annotations.Toggle
+    import org.codehaus.groovy.grails.commons.GrailsDomainClassProperty
+    import org.codehaus.groovy.grails.commons.GrailsDomainClass
+%>
 
-<%  excludedProps = Event.allEvents.toList() << 'version' << 'dateCreated' << 'lastUpdated'
-	persistentPropNames = domainClass.persistentProperties*.name
-	boolean hasHibernate = pluginManager?.hasGrailsPlugin('hibernate') || pluginManager?.hasGrailsPlugin('hibernate4')
-	if (hasHibernate) {
-		def GrailsDomainBinder = getClass().classLoader.loadClass('org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsDomainBinder')
-		if (GrailsDomainBinder.newInstance().getMapping(domainClass)?.identity?.generator == 'assigned') {
-			persistentPropNames << domainClass.identifier.name
-		}
-	}
-	props = domainClass.properties.findAll { persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) && (domainClass.constrainedProperties[it.name] ? domainClass.constrainedProperties[it.name].display : true) }
-	Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
-	for (p in props) {
-		if (p.embedded) {
-			def embeddedPropNames = p.component.persistentProperties*.name
-			def embeddedProps = p.component.properties.findAll { embeddedPropNames.contains(it.name) && !excludedProps.contains(it.name) }
-			Collections.sort(embeddedProps, comparator.constructors[0].newInstance([p.component] as Object[]))
-			%><fieldset class="embedded"><legend><g:message code="${domainClass.propertyName}.${p.name}.label" default="${p.naturalName}" /></legend><%
-				for (ep in p.component.properties) {
-					renderFieldForProperty(ep, p.component, "${p.name}.")
-				}
-			%></fieldset><%
-		} else {
-			renderFieldForProperty(p, domainClass)
-		}
-	}
 
-private renderFieldForProperty(p, owningClass, prefix = "") {
-	boolean hasHibernate = pluginManager?.hasGrailsPlugin('hibernate') || pluginManager?.hasGrailsPlugin('hibernate4')
-	boolean required = false
-	if (hasHibernate) {
-		cp = owningClass.constrainedProperties[p.name]
-		required = (cp ? !(cp.propertyType in [boolean, Boolean]) && !cp.nullable && (cp.propertyType != String || !cp.blank) : false)
-	} %>
-			<div class="form-group \${hasErrors(bean: ${propertyName}, field: '${prefix}${p.name}', 'error')} ${required ? 'required' : ''}">
-				<label for="${prefix}${p.name}" class="control-label col-md-3">
+<%
+    def domainSuffix = "Instance"
+    excludedProps = Event.allEvents.toList() << 'id' << 'version' << 'dateCreated' << 'lastUpdated'
 
-                    <g:message code="${domainClass.propertyName}.${prefix}${p.name}.label" default="${p.naturalName}" />
+    // Param Render Template
+    beanFormName = domainClass?.logicalPropertyName
 
-                </label>
+    // Param Render Template
+    domainInstanceFormName = beanFormName + domainSuffix
 
-				<div class="col-md-8">
+    // Param Render Template
+    domainInstanceFormValue = "\${${domainInstanceFormName}}"
 
-					${renderEditor(p)}
-					<span class="help-inline">\${hasErrors(bean: ${propertyName}, field: '${p.name}', 'error')}</span>
-				</div>
+    hasHibernate = pluginManager?.hasGrailsPlugin('hibernate') || pluginManager?.hasGrailsPlugin('hibernate4')
 
-                <div class="col-md-1">
-                    <% if (required) { %><i class="glyphicon glyphicon-asterisk text-danger text-left"></i><% } %>
-                </div>
-			</div>
-<% } %>
+    def persistentPropNames = domainClass.persistentProperties*.name
+
+    def properties = domainClass.properties.findAll {
+        persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) && (domainClass.constrainedProperties[it.name] ? domainClass.constrainedProperties[it.name].display : true)
+    }
+%>
+
+<%
+    Collections.sort(properties, comparator.constructors[0].newInstance([domainClass] as Object[]))
+    for (fieldProperty in properties) {
+        renderFieldProperty(domainClass, fieldProperty, "")
+    }
+%>
+
+
+<%
+    private def renderFieldProperty(parentPropertyClass, property, prefixForForm = "") {
+
+        boolean propertyEmbedded = property.embedded
+        def parentPropertyName = parentPropertyClass.logicalPropertyName
+        // Param Render Template
+        def propertyName = property.name
+
+        // Param Render Template
+        def propertyNaturalName = property.naturalName
+
+        boolean required = false
+        if (hasHibernate) {
+            // Param Render Template
+            constrainedProperty = parentPropertyClass.constrainedProperties[propertyName]
+            required = (constrainedProperty ? !(constrainedProperty.propertyType in [boolean, Boolean]) && !constrainedProperty.nullable && (constrainedProperty.propertyType != String || !constrainedProperty.blank) : false)
+        }
+
+        if (!propertyEmbedded) {
+
+            // Param Render Template
+            def prefixForValue = prefixForForm.replace(".", "?.")
+
+            // Param Render Template
+            propertyFormName = prefixForForm + propertyName
+
+            // Param Render Template
+            propertyFormValue = "\${${domainInstanceFormName + "?." + prefixForValue + propertyName}}"
+
+            propertyConstraints = "grailsApplication.getArtefactByLogicalPropertyName(\"Domain\",\""+ parentPropertyName + "\").constrainedProperties"
+
+            // Param Render Template
+            // constraintsFormValue = parentPropertyClass?.referenceInstance.constraints
+
+            // Param Render Template
+            annotations = parentPropertyClass?.clazz.getDeclaredField(propertyName)?.annotations
+%>
+
+<div class="form-group \${hasErrors(bean: ${beanFormName}, field: '${propertyFormName}', 'error')} ${
+        required ? 'required' : ''}">
+    <label for="${propertyFormName}" class="control-label col-md-3">
+        <g:message code="${propertyFormName}.label" default="${propertyNaturalName}"/>
+    </label>
+
+    <div class="col-md-8">
+        ${renderEditor(domainClass, property, constrainedProperty, propertyFormName, propertyFormValue, propertyConstraints)}
+        <span class="help-inline">\${hasErrors(bean: ${beanFormName}, field: '${propertyFormName}', 'error')}</span>
+    </div>
+
+    <div class="col-md-1">
+        <% if (required) { %><i class="glyphicon glyphicon-asterisk text-danger text-left"></i><% } %>
+    </div>
+</div>
+
+<%
+        toggleChild = parentPropertyClass?.clazz.getDeclaredField(propertyName)?.getAnnotation(Toggle.class)?.value()
+        if (toggleChild) {
+%>
+
+<g:javascript library="jquery"/>
+<g:javascript>
+
+        if (<%=propertyFormValue%>) {
+            \$("#${toggleChild}Toggle").removeClass('hide');
+        } else {
+            \$("#${toggleChild}Toggle").addClass('hide');
+        }
+
+        function toggle(flag) {
+            if (flag) {
+                \$("#${toggleChild}Toggle").removeClass('hide');
+            } else {
+               \$("#${toggleChild}Toggle").addClass('hide');
+            }
+        }
+
+</g:javascript>
+
+<%
+        }
+    } else {
+%>
+
+<div id="${propertyName}Toggle">
+    <fieldset class="embedded">
+        <legend>
+            <g:message code="${property.name}.label" default="${propertyNaturalName}"/>
+        </legend>
+
+        <%
+                parentPropertyClass = property.component
+
+                def persistentPropNames = parentPropertyClass.persistentProperties*.name
+
+                def properties = parentPropertyClass.properties.findAll {
+                    persistentPropNames.contains(it.name) && !excludedProps.contains(it.name) && (parentPropertyClass.constrainedProperties[it.name] ? parentPropertyClass.constrainedProperties[it.name].display : true)
+                }
+
+                Collections.sort(properties, comparator.constructors[0].newInstance([parentPropertyClass] as Object[]))
+                for (childProperty in properties) {
+
+                    renderFieldProperty(parentPropertyClass, childProperty, prefixForForm + propertyName + ".")
+                }
+        %>
+
+    </fieldset>
+</div>
+<%
+        }
+    }
+%>

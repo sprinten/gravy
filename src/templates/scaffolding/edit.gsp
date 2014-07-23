@@ -18,16 +18,17 @@
         </div>
     </g:hasErrors>
 
-    <% //<g:render template="/layouts/errors"/> %>
+    <% //<g:render template="/layouts/errors"/>  %>
 
     <legend><g:message code="default.edit.label" args="[entityName]"/></legend>
 
-    <g:form method="post" class="form-horizontal form-group-sm" role="form" <%=multiPart ? ' enctype="multipart/form-data"' : '' %>>
+    <g:form method="post" class="form-horizontal form-group-sm"
+            role="form" <%=multiPart ? ' enctype="multipart/form-data"' : '' %>>
     <g:hiddenField name="id" value="\${${propertyName}?.id}"/>
     <g:hiddenField name="version" value="\${${propertyName}?.version}"/>
     <g:hiddenField name="_method" value="PUT"/>
 
-    <f:all bean="${propertyName}"/>
+    <g:render template="form"/>
 
     <div class="form-actions margin-top-medium">
         <g:actionSubmit class="btn btn-primary" action="update"
@@ -38,7 +39,7 @@
 
 </div>
 
-<% //<jqvalui:renderValidationScript for="${domainClass.fullName}"/> %>
+<% //<jqvalui:renderValidationScript for="${domainClass.fullName}"/>  %>
 
 </body>
 
