@@ -1,8 +1,9 @@
-package rnp
+package rnp.fisa
 
 import grady.City
 import grady.State
 import org.bson.types.ObjectId
+import rnp.fisa.pacient.Address
 
 
 class Pacient {
@@ -30,8 +31,6 @@ class Pacient {
 
         fumator nullable: true
 
-        dosare nullable: true
-
         state blank: true, nullable: true, cascade: [child: "city"]
         city blank: true, nullable: true
         address nullable: true
@@ -40,16 +39,12 @@ class Pacient {
 
     static embedded = ['address', 'acasa']
 
-    static hasMany = [dosare: Dosar]
-
     ObjectId id
     String nume
     String prenume
     String cnp
 
     Date dataNastere
-
-    List<Dosar> dosare = [].withLazyDefault { new Dosar() }
 
     State state
     City city

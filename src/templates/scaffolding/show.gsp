@@ -1,17 +1,4 @@
 <% import grails.persistence.Event %>
-<%=packageName%>
-<!DOCTYPE html>
-<html>
-
-<head>
-	<meta name="layout" content="kickstart" />
-	<g:set var="entityName" value="\${message(code: '${domainClass.propertyName}.label', default: '${className}')}" />
-	<title><g:message code="default.show.label" args="[entityName]" /></title>
-</head>
-
-<body>
-
-<div class="formy well">
 
 	<table class="table">
 		<tbody>
@@ -45,8 +32,3 @@
 		<%  } %>
 		</tbody>
 	</table>
-</div>
-
-</body>
-
-</html>

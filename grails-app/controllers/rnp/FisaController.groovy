@@ -1,24 +1,17 @@
 package rnp
 
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-/**
- * FisaController
- * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
- */
 @Transactional(readOnly = true)
 class FisaController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
     // static scaffold = true
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Fisa.list(params), model: [fisaInstanceCount: Fisa.count()]
-    }
-
-    def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Fisa.list(params), model: [fisaInstanceCount: Fisa.count()]
     }
@@ -31,23 +24,31 @@ class FisaController {
         respond new Fisa(params)
     }
 
+    def navigate() {
+        render(view: params.mode, model: [fisaInstance: new Fisa(params), currentModel: params.next])
+    }
+
     @Transactional
     def save(Fisa fisaInstance) {
+
         if (fisaInstance == null) {
             notFound()
             return
         }
 
-        if (fisaInstance.hasErrors()) {
-            respond fisaInstance.errors, view: 'create'
+        println(params.current)
+
+        if (!fisaInstance.validate([params.current])) {
+            println(params.current)
+            respond fisaInstance.errors, view: 'create', model: [currentModel: params.current]
             return
         }
 
-        fisaInstance.save flush: true
+        fisaInstance.save flush: true, validate: false
 
         request.withFormat {
-            form {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'fisaInstance.label', default: 'Fisa'), fisaInstance.numar])
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'fisa.label', default: 'Fisa'), fisaInstance.id])
                 redirect fisaInstance
             }
             '*' { respond fisaInstance, [status: CREATED] }
@@ -73,8 +74,8 @@ class FisaController {
         fisaInstance.save flush: true
 
         request.withFormat {
-            form {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Fisa.label', default: 'Fisa'), fisaInstance.numar])
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Fisa.label', default: 'Fisa'), fisaInstance.id])
                 redirect fisaInstance
             }
             '*' { respond fisaInstance, [status: OK] }
@@ -92,8 +93,8 @@ class FisaController {
         fisaInstance.delete flush: true
 
         request.withFormat {
-            form {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Fisa.label', default: 'Fisa'), fisaInstance.numar])
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Fisa.label', default: 'Fisa'), fisaInstance.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }
@@ -102,8 +103,8 @@ class FisaController {
 
     protected void notFound() {
         request.withFormat {
-            form {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'fisaInstance.label', default: 'Fisa'), params.id])
+            form multipartForm {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'fisa.label', default: 'Fisa'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }

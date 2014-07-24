@@ -1,4 +1,4 @@
-package rnp
+package rnp.fisa.afectiune
 
 import org.bson.types.ObjectId
 

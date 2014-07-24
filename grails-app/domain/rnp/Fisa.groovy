@@ -1,63 +1,50 @@
 package rnp
 
-import grady.annotations.Toggle
 import org.bson.types.ObjectId
+import rnp.fisa.Afectiune
+import rnp.fisa.Dosar
+import rnp.fisa.Pacient
 
+/**
+ * Fisa
+ * A domain class describes the data object and it's mapping to the database
+ */
 class Fisa {
+
 
     static mapWith = "mongo"
 
     static constraints = {
 
         numar nullable: false, unique: true
-        dataCompletare attributes: ["precision": "day", "years": 2016..1970]
 
-        status inList: ["Initiat", "Aprobat"]
-
-        tip inList: ["Initiere", "Monitorizare"]
+        afectiune nullable: true
 
         dosar nullable: true
 
-        retroactiv nullable: true
+        dosar pacient: true
 
-        hasBoala nullable: false
-
-        boala nullable: true, validator: { val, obj ->
-            if (obj.hasBoala) {
-
-                if (val?.isEmpty()) {
-                    return ['not.empty']
-                }
-            } else {
-                if (!val?.isEmpty()) {
-                    return ['empty']
-                }
-            }
-        }
     }
-
-    static embedded = ['boala']
-
-    static belongsTo = [dosar: Dosar]
 
     ObjectId id
     Integer numar
 
+    Afectiune afectiune
+
     Dosar dosar
 
-    @Toggle("boala")
-    Boolean hasBoala
+    Pacient pacient
 
-    Boala boala
 
-    Boolean retroactiv
-
-    Date dataCompletare
-
-    String status
-    String tip
-
-    String toString() {
-        return numar
+    @Override
+    public String toString() {
+        return "Fisa{" +
+                "id=" + id +
+                ", numar=" + numar +
+                ", afectiune=" + afectiune +
+                ", dosar=" + dosar +
+                ", pacient=" + pacient +
+                ", version=" + version +
+                '}';
     }
 }
